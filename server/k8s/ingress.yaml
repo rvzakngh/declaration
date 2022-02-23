@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: declaration-ingress
+spec:
+  tls:
+  - secretName: declaration-tls
+  rules:
+  - http:
+      paths:
+      - path: /decl/*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: declaration-service
+            port:
+              number: 80
