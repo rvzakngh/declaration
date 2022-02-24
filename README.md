@@ -1,7 +1,7 @@
 # Overview
 This project is a sample health declaration application consist of both frontend (SPA) and webservice/server. The project consists of:
 - SPA (/spa) developed using Angular. For more explanation on the use cases, refer to [/spa](spa/)
-- Web service (/server) developed using Java with Jersey
+- Web service (/server) developed using Java with Jersey. For more explanation on APIs, refer to [/server](server/)
 - Kubernetes configuration files (targeted for Google Kubernetes Engine)
 
 # Build
