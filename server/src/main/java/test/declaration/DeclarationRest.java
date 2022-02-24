@@ -25,10 +25,12 @@ public class DeclarationRest {
         NOCACHE = cc;
     } 
 
-    private List<Declaration> data = new ArrayList<Declaration>();
+    // in-memory data (non-DB), for testing purpose
+    private List<Declaration> data = new ArrayList<>();
     private final ObjectMapper mapper = new ObjectMapper();
 
     public DeclarationRest() {
+        // Fake data
         data.add(new Declaration("Andrew", 38.0f, true, false, System.currentTimeMillis()-500000));
         data.add(new Declaration("Bob", 37.0f, true, false, System.currentTimeMillis()-400000));
         data.add(new Declaration("Charlie", 37.5f, true, true, System.currentTimeMillis()-300000));
@@ -37,6 +39,9 @@ public class DeclarationRest {
     }
 
 
+    /**
+     * Return all declarations (in-memory/testing)
+     */
     @GET
     @Path("list-all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,6 +56,9 @@ public class DeclarationRest {
         }
     }
 
+    /**
+     * Return all declarations (DB)
+     */
     @GET
     @Path("list-all-db")
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,6 +74,9 @@ public class DeclarationRest {
         }
     }
 
+    /**
+     * Submit a declarations (in-memory/testing)
+     */
     @POST
     @Path("submit")
     @Produces(MediaType.APPLICATION_JSON)
@@ -82,6 +93,9 @@ public class DeclarationRest {
         }
     }
 
+    /**
+     * Submit a declarations (DB)
+     */
     @POST
     @Path("submit-db")
     @Produces(MediaType.APPLICATION_JSON)

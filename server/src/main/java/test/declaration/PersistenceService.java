@@ -14,9 +14,13 @@ import java.util.List;
 
 import org.jose4j.base64url.Base64Url;
 
+/**
+ * Persistence service to facilitate interaction with stored data (DB in this case)
+ */
 public class PersistenceService {
     private static final PersistenceService INSTANCE = new PersistenceService();
 
+    // localhost as it's expected to connect to DB via a sidecar: Cloud SQL Proxy
     private static final String URL="jdbc:mysql://localhost:3306/decl";
     
     private PersistenceService() {
@@ -26,19 +30,19 @@ public class PersistenceService {
             System.err.println("JDBC driver not found");
             e.printStackTrace();
         }
-          
-        
     }
     public static PersistenceService getInstance() {
         return INSTANCE;
     }
     private Connection getConnection() throws SQLException {
+        // Get DB credential via env, set by kubernetes secret
         String username = System.getenv("DB_USER");
         String password = System.getenv("DB_PASS");
         
         return DriverManager.getConnection(URL, username, password);
     }
 
+    // Just a simple test for DB connection
     public String test() {
         Connection conn = null;
         try {
@@ -53,6 +57,7 @@ public class PersistenceService {
         }
     }
 
+    // Return all declarations in DB
     public Collection<Declaration> listAll() {
         Connection conn = null;
         ResultSet rs = null;
@@ -92,15 +97,19 @@ public class PersistenceService {
         }
         return Base64Url.encode(b);
     }
+
+    // Save Declaration to DB
     public boolean save(Declaration decl) {
         Connection conn = null;
         try {
             conn = getConnection();
-            PreparedStatement ps = conn.prepareStatement("insert into declaration(uuid, username, temperature, has_symptoms, is_close, submitted_time) values (?, ?, ?, ?, ?, ?)");
-            String uuid = generateUUID();
+            PreparedStatement ps = conn.prepareStatement(
+                "insert into declaration(uuid, username, temperature, has_symptoms, is_close, submitted_time) values (?, ?, ?, ?, ?, ?)"
+            );
+            String uuid = generateUUID(); // for DB primary key
             ps.setString(1, uuid);
             ps.setString(2, decl.getUsername());
-            ps.setInt(3, Float.valueOf(decl.getTemperature()*10).intValue());
+            ps.setInt(3, Float.valueOf(decl.getTemperature()*10f).intValue()); // store in DB as int (37.5 ==> 375)
             ps.setInt(4, decl.hasSymptoms() ? 1 : 0);
             ps.setInt(5, decl.isCloseContact() ? 1 : 0);
             ps.setTimestamp(6, new Timestamp(decl.getSubmittedDate()));
