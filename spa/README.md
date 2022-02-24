@@ -36,6 +36,18 @@ Error page or error notification/toast can be added to handle various error (e.g
 ### Paging
 The current listing of health declarations does not have paging or search filter to limit the search result.
 
+# Example of unit test result
+```
+$ ng test
+⠙ Generating browser application bundles (phase: setup)...25 02 2022 00:47:38.669:WARN [karma]: No captured browser, open http://localhost:9876/
+25 02 2022 00:47:38.687:INFO [karma-server]: Karma v6.3.16 server started at http://localhost:9876/
+25 02 2022 00:47:38.688:INFO [launcher]: Launching browsers Chrome with concurrency unlimited
+25 02 2022 00:47:38.705:INFO [launcher]: Starting browser Chrome
+25 02 2022 00:47:51.732:WARN [karma]: No captured browser, open http://localhost:9876/
+25 02 2022 00:47:51.967:INFO [Chrome 98.0.4758.102 (Linux x86_64)]: Connected on socket Ua9uhWlmYphmCi0pAAAB with id 85156698
+Chrome 98.0.4758.102 (Linux x86_64): Executed 5 of 5 SUCCESS (0.487 secs / 0.384 secs)
+TOTAL: 5 SUCCESS
+```
 
 # Angular CLI
 
