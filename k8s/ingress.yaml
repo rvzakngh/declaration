@@ -15,3 +15,10 @@ spec:
             name: declaration-service
             port:
               number: 80
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: spa-service
+            port:
+              number: 80
