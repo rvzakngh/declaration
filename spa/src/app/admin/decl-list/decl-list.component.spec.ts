@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthnService } from 'src/app/authn.service';
@@ -10,10 +11,11 @@ describe('DeclListComponent', () => {
   let fixture: ComponentFixture<DeclListComponent>;
   let ds: DeclarationService;
   let as: AuthnService;
+  let httpClient: HttpClient
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule ],
+      imports: [ RouterTestingModule, HttpClientModule ],
       providers: [ AuthnService, DeclarationService ],
       declarations: [ DeclListComponent ]
     })
@@ -24,6 +26,7 @@ describe('DeclListComponent', () => {
     TestBed.configureTestingModule({
       providers: [ AuthnService, DeclarationService ],
     });
+    httpClient = TestBed.get(HttpClient);
     as = TestBed.inject(AuthnService);
     ds = TestBed.inject(DeclarationService);
     fixture = TestBed.createComponent(DeclListComponent);
