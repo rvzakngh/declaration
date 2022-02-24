@@ -1,5 +1,7 @@
 package test.declaration;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Declaration {
     private String username;
     private float temperature;
@@ -14,24 +16,28 @@ public class Declaration {
         this.isCloseContact = isCloseContact;
         this.submittedDate = submittedDate;
     }
+    @JsonProperty("username")
     public String getUsername() {
         return username;
     }
     public void setUsername(String username) {
         this.username = username;
     }
+    @JsonProperty("temperature")
     public float getTemperature() {
         return temperature;
     }
     public void setTemperature(float temperature) {
         this.temperature = temperature;
     }
+    @JsonProperty("hasSymptoms")
     public boolean hasSymptoms() {
         return hasSymptoms;
     }
     public void setHasSymptoms(boolean hasSymptoms) {
         this.hasSymptoms = hasSymptoms;
     }
+    @JsonProperty("isCloseContact")
     public boolean isCloseContact() {
         return isCloseContact;
         
@@ -39,6 +45,7 @@ public class Declaration {
     public void setCloseContact(boolean isCloseContact) {
         this.isCloseContact = isCloseContact;
     }
+    @JsonProperty("submittedDate")
     public long getSubmittedDate() {
         return submittedDate;
     }

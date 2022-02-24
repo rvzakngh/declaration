@@ -10,7 +10,6 @@ import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.CacheControl;
 import jakarta.ws.rs.core.MediaType;
@@ -18,6 +17,14 @@ import jakarta.ws.rs.core.Response;
 
 @Path("declaration")
 public class DeclarationRest {
+    private static final CacheControl NOCACHE;
+    static {
+        CacheControl cc = new CacheControl();
+        cc.setNoCache(true);
+        cc.setNoStore(true);
+        NOCACHE = cc;
+    } 
+
     private List<Declaration> data = new ArrayList<Declaration>();
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -36,7 +43,7 @@ public class DeclarationRest {
     public Response listAll() {
         try {
             String result = mapper.writeValueAsString(data);
-            return Response.ok().entity(result).cacheControl(CacheControl.valueOf("no-cache, no-store")).build();
+            return Response.ok().entity(result).cacheControl(NOCACHE).build();
         } catch (Exception e) {
             System.err.println("Failed to list all");
             e.printStackTrace();
@@ -51,7 +58,7 @@ public class DeclarationRest {
         try {
             Collection<Declaration> decls = PersistenceService.getInstance().listAll();
             String result = mapper.writeValueAsString(decls);
-            return Response.ok().entity(result).cacheControl(CacheControl.valueOf("no-cache, no-store")).build();
+            return Response.ok().entity(result).cacheControl(NOCACHE).build();
         } catch (Exception e) {
             System.err.println("Failed to list all from db");
             e.printStackTrace();
