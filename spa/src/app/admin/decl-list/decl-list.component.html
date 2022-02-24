@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+        <table class="table table-hover">
+            <thead class="table-light">
+            <tr>
+                <th class="col-5">Submitted on</th>
+                <th class="col-4">Name</th>
+                <th class="col-1">Temperature</th>
+                <th class="col-1">Has symptoms</th>
+                <th class="col-1">A close contact</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="table-light" app-entry *ngFor="let declaration of declarations" [declaration]="declaration"></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-3 text-center">
+                <button type="button" class="btn btn-primary" (click)="onRefresh();">
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isRefreshing"></span>
+                    {{ isRefreshing ? "Refreshing..." : "Refresh" }}
+                </button>
+            </div>
+            <div class="col-sm-3 text-center">
+                <button type="button" class="btn btn-danger" (click)="onLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>

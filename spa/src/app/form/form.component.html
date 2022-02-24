@@ -1,0 +1,10 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Health Declaration Form</h5>
+        <app-form-new (onSubmitted)="onSubmitted($event)" *ngIf="!declaration"></app-form-new>
+        <app-form-view (submitNew)="onNew()" *ngIf="declaration" [declaration]="declaration" ></app-form-view>
+    </div>
+</div>
+
+
+

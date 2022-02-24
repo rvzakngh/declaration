@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 alert alert-success" role="alert">
+            <p>Declaration has been successfully submitted on {{declaration?.submittedDate?.toLocaleString()}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <form>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Name</label>
+                    <input type="text" readonly class="form-control-plaintext" [value]="declaration?.username">
+                </div>
+                <div class="mb-3">
+                    <label for="temperature" class="form-label">Temperature (in °C)</label>
+                    <input type="text" readonly class="form-control-plaintext" [value]="declaration?.temperature">
+                </div>
+                <div class="mb-3">
+                    <label for="symptoms" class="form-label">Do you have any of the following symptoms now or within the last 14 days:
+                        Cough, smell/taste impairment, fever, breathing difficulties, body aches,
+                        headaches, fatigue, sore throat, diarrhoea, and / or runny nose (even if your
+                        symptoms are mild)?</label>
+                    <input type="text" readonly class="form-control-plaintext" [value]="declaration?.hasSymptoms ? 'Yes' : 'No'">
+                </div>
+                <div class="mb-3">
+                    <label for="closecontact" class="form-label">Have you been in contact with anyone who is suspected to have or/has been
+                        diagnosed with Covid-19 within the last 14 days?</label>
+                    <input type="text" readonly class="form-control-plaintext" [value]="declaration?.isCloseContact ? 'Yes' : 'No'">
+                </div>
+            </form>
+            <div class="row justify-content-center">
+                <div class="col-sm-6 text-center">
+                    <button type="button" class="btn btn-primary" (click)="onNew()">Submit another one</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

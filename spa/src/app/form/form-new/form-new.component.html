@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <form #f="ngForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Name</label>
+                    <input type="text" id="username" class="form-control" ngModel name="username" required #username="ngModel">
+                    <small class="form-text" *ngIf="!username.valid && username.touched">Please enter a valid email</small>
+                </div>
+                <div class="mb-3">
+                    <label for="temperature" class="form-label">Temperature (in °C)</label>
+                    <input type="number" id="temperature" class="form-control" ngModel name="temperature" min="20" max="50" required #temperature="ngModel">
+                    <small class="form-text" *ngIf="!temperature.valid && temperature.touched">Please enter a valid temperature (20-50)°C</small>
+                </div>
+                <div class="mb-3">
+                    <label for="symptoms" class="form-label">Do you have any of the following symptoms now or within the last 14 days:
+                        Cough, smell/taste impairment, fever, breathing difficulties, body aches,
+                        headaches, fatigue, sore throat, diarrhoea, and / or runny nose (even if your
+                        symptoms are mild)?</label>
+                <div class="radio" *ngFor="let val of yesno">
+                    <input type="radio" id="symptoms" ngModel name="symptoms" required [value]="val">{{val}}
+                </div>
+                </div>
+                <div class="mb-3">
+                    <label for="closecontact" class="form-label">Have you been in contact with anyone who is suspected to have or/has been
+                        diagnosed with Covid-19 within the last 14 days?</label>
+                <div class="radio" *ngFor="let val of yesno">
+                    <input type="radio" id="closecontact" ngModel name="closecontact" required [value]="val">{{val}}
+                </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 text-center">
+                        <button class="btn btn-primary" type="submit" [disabled]="!f.valid || isSubmitting">
+                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" *ngIf="isSubmitting"></span>
+                            {{ isSubmitting ? "Submitting..." : "Submit" }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
